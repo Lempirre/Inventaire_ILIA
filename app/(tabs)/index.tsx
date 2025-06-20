@@ -1,3 +1,5 @@
+// screens/IndexScreen.tsx
+
 import React, { useState } from "react";
 import {
   View,
@@ -7,21 +9,18 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 
-import LocationScreen from "@/app/(tabs)/location";
-
+// Définition du type Fiche
 type Fiche = {
   id: number;
   composants: string[];
 };
 
-const IndexScreen = () => {
-  const navigation = useNavigation();
-
-  const [fiches, setFiches] = useState([
+export default function IndexScreen() {
+  const router = useRouter();
+  const [fiches, setFiches] = useState<Fiche[]>([
     { id: 1, composants: ["Composant A", "Composant B"] },
   ]);
 
@@ -36,41 +35,39 @@ const IndexScreen = () => {
 
   const ajouterComposant = (ficheId: number) => {
     setFiches(
-      fiches.map((fiche) => {
-        if (fiche.id === ficheId) {
-          return {
-            ...fiche,
-            composants: [
-              ...fiche.composants,
-              `Composant ${fiche.composants.length + 1}`,
-            ],
-          };
-        }
-        return fiche;
-      })
+      fiches.map((fiche) =>
+        fiche.id === ficheId
+          ? {
+              ...fiche,
+              composants: [
+                ...fiche.composants,
+                `Composant ${fiche.composants.length + 1}`,
+              ],
+            }
+          : fiche
+      )
     );
   };
 
   const supprimerComposant = (ficheId: number) => {
     setFiches(
-      fiches.map((fiche) => {
-        if (fiche.id === ficheId && fiche.composants.length > 0) {
-          return {
-            ...fiche,
-            composants: fiche.composants.slice(0, -1),
-          };
-        }
-        return fiche;
-      })
+      fiches.map((fiche) =>
+        fiche.id === ficheId
+          ? {
+              ...fiche,
+              composants: fiche.composants.slice(0, -1),
+            }
+          : fiche
+      )
     );
   };
 
   const renderFiche = ({ item }: { item: Fiche }) => (
     <View style={styles.card}>
       <Text style={styles.cardTitle}>Fiche #{item.id}</Text>
-      {item.composants.map((c, idx) => (
+      {item.composants.map((composant, idx) => (
         <Text key={idx} style={styles.componentText}>
-          {c}
+          {composant}
         </Text>
       ))}
       <View style={styles.buttonRow}>
@@ -84,8 +81,8 @@ const IndexScreen = () => {
         />
       </View>
       <Button
-        color="red"
         title="Supprimer fiche"
+        color="red"
         onPress={() => supprimerFiche(item.id)}
       />
     </View>
@@ -110,7 +107,7 @@ const IndexScreen = () => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: { padding: 20, flex: 1 },
@@ -126,7 +123,7 @@ const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10,
+    marginVertical: 10,
   },
   bottomButtons: { marginTop: 20 },
   rentButton: {
@@ -135,7 +132,9 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
   },
-  rentButtonText: { color: "white", textAlign: "center", fontWeight: "bold" },
+  rentButtonText: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
+  },
 });
-
-export default IndexScreen;

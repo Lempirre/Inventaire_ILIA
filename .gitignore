@@ -3,6 +3,20 @@
 # dependencies
 node_modules/
 
+# Node modules
+node_modules/
+
+# macOS files
+.DS_Store
+
+# Android build
+android/app/build/
+android/.gradle/
+
+# iOS build
+ios/build/
+ios/Pods/
+
 # Expo
 .expo/
 dist/
