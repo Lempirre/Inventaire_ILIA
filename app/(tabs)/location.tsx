@@ -623,7 +623,7 @@ const LocationScreen = () => {
 
       {showForm && (
         <View style={styles.formContainer}>
-          <Text style={styles.formTitle}>Nouvelle Location</Text>
+          <Text style={styles.formTitle}>Nouvelle location</Text>
 
           <TouchableOpacity
             style={styles.pickerButton}
