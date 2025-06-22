@@ -12,6 +12,8 @@
       "supportsTablet": true
     },
     "android": {
+      "userInterfaceStyle": "light",
+
       "permissions": [
         "WRITE_EXTERNAL_STORAGE"
       ],
