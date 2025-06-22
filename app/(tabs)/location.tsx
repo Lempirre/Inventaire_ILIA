@@ -677,14 +677,14 @@ const LocationScreen = () => {
 
           <TextInput
             style={styles.input}
-            placeholder="Date de prêt (DD-MM-YY)"
+            placeholder="Date de prêt (YYYY-MM-DD)"
             value={formData.datePret}
             onChangeText={(text) => handleInputChange("datePret", text)}
           />
 
           <TextInput
             style={styles.input}
-            placeholder="Date de remise (DD-MM-YY)"
+            placeholder="Date de remise (YYYY-MM-DD)"
             value={formData.dateRemise}
             onChangeText={(text) => handleInputChange("dateRemise", text)}
           />
